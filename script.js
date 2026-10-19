@@ -151,12 +151,9 @@ dataInicio.addEventListener("change", function () {
 
 // RECUPERAR A DATA SALVA
 
-const dataSalva = localStorage.getItem("dataNamoro");
+dataInicio.value = "2025-06-12";
 
-if (dataSalva) {
-    dataInicio.value = dataSalva;
-}
-
+localStorage.setItem("dataNamoro", "2025-06-12");
 atualizarContador();
 
 setInterval(atualizarContador, 60000);
