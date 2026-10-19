@@ -157,3 +157,79 @@ localStorage.setItem("dataNamoro", "2025-06-12");
 atualizarContador();
 
 setInterval(atualizarContador, 60000);
+// ===== GALERIA INTERATIVA =====
+
+const fotos = [...document.querySelectorAll(".foto-card .foto")];
+
+const visualizador = document.getElementById("visualizador");
+const imagemAmpliada = document.getElementById("imagemAmpliada");
+const legendaAmpliada = document.getElementById("legendaAmpliada");
+
+const fecharFoto = document.getElementById("fecharFoto");
+const fotoAnterior = document.getElementById("fotoAnterior");
+const proximaFoto = document.getElementById("proximaFoto");
+
+let indiceAtual = 0;
+
+function mostrarFoto(indice) {
+    indiceAtual = (indice + fotos.length) % fotos.length;
+
+    const foto = fotos[indiceAtual];
+    const cartao = foto.closest(".foto-card");
+
+    imagemAmpliada.src = foto.src;
+    imagemAmpliada.alt = foto.alt;
+
+    legendaAmpliada.textContent =
+        cartao.querySelector("figcaption").textContent;
+
+    visualizador.classList.add("aberto");
+    visualizador.setAttribute("aria-hidden", "false");
+
+    document.body.style.overflow = "hidden";
+}
+
+function fecharVisualizador() {
+    visualizador.classList.remove("aberto");
+    visualizador.setAttribute("aria-hidden", "true");
+
+    document.body.style.overflow = "";
+}
+
+fotos.forEach((foto, indice) => {
+    foto.closest(".foto-card").addEventListener("click", () => {
+        mostrarFoto(indice);
+    });
+});
+
+fecharFoto.addEventListener("click", fecharVisualizador);
+
+fotoAnterior.addEventListener("click", () => {
+    mostrarFoto(indiceAtual - 1);
+});
+
+proximaFoto.addEventListener("click", () => {
+    mostrarFoto(indiceAtual + 1);
+});
+
+visualizador.addEventListener("click", (evento) => {
+    if (evento.target === visualizador) {
+        fecharVisualizador();
+    }
+});
+
+document.addEventListener("keydown", (evento) => {
+    if (!visualizador.classList.contains("aberto")) return;
+
+    if (evento.key === "Escape") {
+        fecharVisualizador();
+    }
+
+    if (evento.key === "ArrowRight") {
+        mostrarFoto(indiceAtual + 1);
+    }
+
+    if (evento.key === "ArrowLeft") {
+        mostrarFoto(indiceAtual - 1);
+    }
+});
