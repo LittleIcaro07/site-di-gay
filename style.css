@@ -463,3 +463,239 @@ footer {
         transition-duration: 0.01ms !important;
     }
 }
+/* ===== GALERIA DE MEMÓRIAS ===== */
+
+.galeria {
+    padding: 65px 20px;
+    color: #f3edff;
+    position: relative;
+    overflow: hidden;
+}
+
+.galeria-titulo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.decoracao {
+    color: #a9c9f5;
+    letter-spacing: 4px;
+    font-size: 14px;
+}
+
+.galeria-titulo h2 {
+    font-size: clamp(26px, 5vw, 38px);
+    color: #d7c2ff;
+    margin: 12px 0;
+    text-shadow: 0 0 15px #a58bd744;
+}
+
+.galeria-titulo p {
+    color: #c4d8f6;
+    font-size: 15px;
+}
+
+.linha-decorativa {
+    display: block;
+    margin-top: 18px;
+    color: #a9c9f5;
+    font-size: 12px;
+}
+
+/* Grade das fotos */
+
+.fotos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Moldura estilo diário */
+
+.foto-card {
+    position: relative;
+    background: #f5f0ff;
+    padding: 10px 10px 16px;
+    border-radius: 3px;
+    box-shadow: 0 6px 20px #00000035;
+    transform: rotate(-1deg);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.foto-card:nth-child(even) {
+    transform: rotate(1.5deg);
+}
+
+.foto-card:hover {
+    transform: translateY(-7px) rotate(0deg);
+    box-shadow: 0 12px 30px #00000055;
+    z-index: 2;
+}
+
+.foto-card .foto {
+    display: block;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.foto-card figcaption {
+    color: #45405e;
+    text-align: center;
+    padding-top: 12px;
+    font-size: 13px;
+    font-family: Georgia, serif;
+}
+
+.numero {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1;
+    background: #263b65dd;
+    color: #ffffff;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 3px;
+}
+
+/* Final da galeria */
+
+.final-galeria {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.final-galeria p {
+    color: #d7c2ff;
+    font-family: Georgia, serif;
+    font-size: 18px;
+}
+
+.final-galeria span {
+    color: #b6c9e9;
+    font-size: 12px;
+}
+
+/* ===== VISUALIZADOR DE FOTOS ===== */
+
+.visualizador {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #080b18ed;
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 60px 65px;
+}
+
+.visualizador.aberto {
+    display: flex;
+}
+
+.imagem-ampliada {
+    max-width: 850px;
+    width: 100%;
+    text-align: center;
+}
+
+.imagem-ampliada img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border: 2px solid #bba6ec;
+    border-radius: 5px;
+    box-shadow: 0 0 35px #9b83e633;
+}
+
+.imagem-ampliada p {
+    color: #e2d6ff;
+    font-family: Georgia, serif;
+    margin-top: 15px;
+}
+
+.fechar-foto {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.navegar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #b9a3e633;
+    border: 1px solid #c5b4f3;
+    color: white;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.navegar:hover {
+    background: #8b74c677;
+}
+
+.anterior {
+    left: 15px;
+}
+
+.proxima {
+    right: 15px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 650px) {
+    .fotos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .foto-card .foto {
+        height: 180px;
+    }
+
+    .visualizador {
+        padding: 55px 45px;
+    }
+
+    .navegar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .anterior {
+        left: 5px;
+    }
+
+    .proxima {
+        right: 5px;
+    }
+}
+
+@media (max-width: 360px) {
+    .fotos {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+    }
+
+    .foto-card .foto {
+        height: 240px;
+    }
+}
